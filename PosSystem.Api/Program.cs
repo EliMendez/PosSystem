@@ -1,4 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using PosSystem.Model.Context;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Get and validate the connection to the database
+var connectionString = builder.Configuration.GetConnectionString("Connection");
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("La cadena de conexión 'Connection' no está configurada");
+}
+
+builder.Services.AddDbContext<PosSystemContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
 
 // Add services to the container.
 
