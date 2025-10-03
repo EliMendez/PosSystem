@@ -15,6 +15,7 @@ namespace PosSystem.Model.Context
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Business> Businesses { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -122,6 +123,27 @@ namespace PosSystem.Model.Context
                 .HasDefaultValueSql("GETDATE()");
 
                 entity.HasIndex(u => u.phone).IsUnique();
+            });
+
+            modelBuilder.Entity<Category>(static entity =>
+            {
+                entity.HasKey(c => c.idCategory);
+
+                entity.Property(c => c.description)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.Property(c => c.status)
+                .IsRequired()
+                .HasMaxLength(8)
+                .IsUnicode(false);
+
+                entity.Property(c => c.creationDate)
+                .IsRequired()
+                .HasDefaultValueSql("GETDATE()");
+
+                entity.HasIndex(c => c.description).IsUnique();
             });
         }
     }
