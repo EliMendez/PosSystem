@@ -18,6 +18,7 @@ namespace PosSystem.Model.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Sale> Sales { get; set; }
+        public DbSet<Sale> SaleDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -249,6 +250,57 @@ namespace PosSystem.Model.Context
 
                 entity.Property(s => s.userCancel)
                 .IsRequired(false);
+
+                //Relationship with sale detail
+                object value = entity.HasMany(s => s.SaleDetails)
+                .WithOne(sd => sd.Sale)
+                .HasForeignKey(sd => sd.idSale)
+                .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasIndex(s => s.bill).IsUnique();
+            });
+
+            modelBuilder.Entity<SaleDetail>(static entity =>
+            {
+                entity.HasKey(sd => sd.idSaleDetail);
+
+                entity.HasOne(sd => sd.Sale)
+                .WithMany(sd => sd.SaleDetails)
+                .HasForeignKey(sd => sd.idSale)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(sd => sd.Product)
+                .WithMany()
+                .HasForeignKey(sd => sd.idProduct)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+                entity.Property(sd => sd.productName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.Property(sd => sd.price)
+                .IsRequired()
+                .HasPrecision(18, 2)
+                .IsUnicode(false);
+
+                entity.Property(sd => sd.count)
+                .IsRequired()
+                .HasDefaultValue(1)
+                .IsUnicode(false);
+
+                entity.Property(sd => sd.discount)
+                .IsRequired()
+                .HasPrecision(18, 2)
+                .HasDefaultValue(0)
+                .IsUnicode(false);
+
+                entity.Property(sd => sd.total)
+                .IsRequired()
+                .HasPrecision(18, 2)
+                .IsUnicode(false);
             });
         }
     }

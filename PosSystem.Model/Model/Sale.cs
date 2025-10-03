@@ -23,10 +23,11 @@ namespace PosSystem.Model.Model
         [ForeignKey(nameof(User))]
         public int idUser { get; set; }
         public virtual User? User { get; set; }
-        public SaleStatus status { get; set; } = SaleStatus.Annulled;
+        public SaleStatus status { get; set; } = SaleStatus.Active;
         public DateOnly? annulledDate { get; set; }
         public string? reason { get; set; } //motivo
         public int? userCancel {  get; set; } //usuario que anula
+        public virtual ICollection<SaleDetail>? SaleDetails { get; set; }
     }
 
     public enum SaleStatus

@@ -22,5 +22,6 @@ namespace PosSystem.Model.Model
         public string phone { get; set; } = string.Empty;
         public string status { get; set; } = string.Empty;
         public DateTime creationDate { get; private set; }
+        public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
     }
 }
