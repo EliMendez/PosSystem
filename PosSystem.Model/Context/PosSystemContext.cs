@@ -17,6 +17,7 @@ namespace PosSystem.Model.Context
         public DbSet<Business> Businesses { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Sale> Sales { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -198,6 +199,56 @@ namespace PosSystem.Model.Context
 
                 entity.HasIndex(p => p.barcode).IsUnique();
                 entity.HasIndex(p => p.description).IsUnique();
+            });
+
+            modelBuilder.Entity<Sale>(static entity =>
+            {
+                entity.HasKey(s => s.idSale);
+
+                entity.Property(s => s.bill)
+                .IsRequired()
+                .HasMaxLength(30)
+                .IsUnicode(false);
+
+                entity.Property(s => s.saleDate)
+                .IsRequired()
+                .HasDefaultValueSql("GETDATE()");
+
+                entity.Property(s => s.dni)
+                .IsRequired()
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
+                entity.Property(s => s.customer)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.Property(s => s.discount)
+                .IsRequired()
+                .HasDefaultValue(0)
+                .HasPrecision(4,2)
+                .IsUnicode(false);
+
+                entity.Property(s => s.total)
+                .IsRequired()
+                .HasDefaultValue(0)
+                .HasPrecision(18, 2)
+                .IsUnicode(false);
+
+                entity.Property(s => s.status)
+                .IsRequired()
+                .HasConversion<string>();
+
+                entity.Property(s => s.annulledDate)
+                .IsRequired();
+
+                entity.Property(s => s.reason)
+                .IsRequired(false)
+                .HasColumnType("TEXT");
+
+                entity.Property(s => s.userCancel)
+                .IsRequired(false);
             });
         }
     }
