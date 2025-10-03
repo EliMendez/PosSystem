@@ -14,6 +14,7 @@ namespace PosSystem.Model.Context
 
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Business> Businesses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -67,6 +68,53 @@ namespace PosSystem.Model.Context
                 entity.Property(u => u.status)
                 .IsRequired()
                 .HasMaxLength(8)
+                .IsUnicode(false);
+
+                entity.Property(u => u.creationDate)
+                .IsRequired()
+                .HasDefaultValueSql("GETDATE()");
+
+                entity.HasIndex(u => u.phone).IsUnique();
+            });
+
+            modelBuilder.Entity<Business>(static entity =>
+            {
+                entity.HasKey(b => b.idBusiness);
+
+                entity.Property(b => b.ruc)
+                .IsRequired()
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
+                entity.Property(b => b.companyName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.Property(b => b.email)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.Property(b => b.phone)
+                .IsRequired()
+                .HasMaxLength(15)
+                .IsUnicode(false);
+
+                entity.Property(b => b.address)
+                .IsRequired()
+                .HasMaxLength(500)
+                .IsUnicode(false);
+
+                entity.Property(b => b.owner)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.Property(b => b.discount)
+                .IsRequired()
+                .HasDefaultValue(0)
+                .HasPrecision(4,2)
                 .IsUnicode(false);
 
                 entity.Property(u => u.creationDate)
