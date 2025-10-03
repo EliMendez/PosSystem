@@ -10,7 +10,7 @@ namespace PosSystem.Model.Context
 {
     public class PosSystemContext : DbContext
     {
-        public PosSystemContext(DbContextOptions<PosSystemContext> options): base(options) { }
+        public PosSystemContext(DbContextOptions<PosSystemContext> options) : base(options) { }
 
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
@@ -19,6 +19,7 @@ namespace PosSystem.Model.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<Sale> SaleDetails { get; set; }
+        public DbSet<DocumentNumber> documentNumbers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -301,6 +302,22 @@ namespace PosSystem.Model.Context
                 .IsRequired()
                 .HasPrecision(18, 2)
                 .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<DocumentNumber>(static entity =>
+            {
+                entity.HasKey(dn => dn.idDocumentNumber);
+
+                entity.Property(dn => dn.document)
+                .IsRequired()
+                .HasMaxLength(10)
+                .IsUnicode(false);
+
+                entity.Property(dn => dn.creationDate)
+                .IsRequired()
+                .HasDefaultValueSql("GETDATE()");
+
+                entity.HasIndex(dn => dn.document).IsUnique();
             });
         }
     }
