@@ -16,6 +16,7 @@ namespace PosSystem.Model.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Business> Businesses { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -143,7 +144,60 @@ namespace PosSystem.Model.Context
                 .IsRequired()
                 .HasDefaultValueSql("GETDATE()");
 
+                //Relationship with product
+                object value = entity.HasMany(c => c.Products)
+                .WithOne(p => p.Category)
+                .HasForeignKey(p => p.idCategory)
+                .OnDelete(DeleteBehavior.Restrict);
+
                 entity.HasIndex(c => c.description).IsUnique();
+            });
+
+            modelBuilder.Entity<Product>(static entity =>
+            {
+                entity.HasKey(p => p.idProduct);
+
+                entity.Property(p => p.barcode)
+                .IsRequired()
+                .HasMaxLength(30)
+                .IsUnicode(false);
+
+                entity.Property(p => p.description)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.HasOne(p => p.Category)
+                .WithMany(c => c.Products)
+                .IsRequired()
+                .HasForeignKey(p => p.idCategory);
+
+                entity.Property(p => p.salePrice)
+                .IsRequired()
+                .HasPrecision(18,2)
+                .IsUnicode(false);
+
+                entity.Property(p => p.stock)
+                .IsRequired()
+                .HasDefaultValue(0)
+                .IsUnicode(false);
+
+                entity.Property(p => p.minimumStock)
+                .IsRequired()
+                .HasDefaultValue(5)
+                .IsUnicode(false);
+
+                entity.Property(p => p.status)
+                .IsRequired()
+                .HasMaxLength(8)
+                .IsUnicode(false);
+
+                entity.Property(p => p.creationDate)
+                .IsRequired()
+                .HasDefaultValueSql("GETDATE()");
+
+                entity.HasIndex(p => p.barcode).IsUnique();
+                entity.HasIndex(p => p.description).IsUnique();
             });
         }
     }
