@@ -22,6 +22,6 @@ namespace PosSystem.Dto.Dto
         public DateOnly? annulledDate { get; set; }
         public string? reason { get; set; } //motivo
         public int? userCancel { get; set; } //usuario que anula
-        public virtual ICollection<SaleDetailDto>? SaleDetails { get; set; }
+        public List<SaleDetailDto>? SaleDetails { get; set; }
     }
 }
