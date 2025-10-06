@@ -8,8 +8,8 @@ namespace PosSystem.Dto.Dto
 {
     public class RoleDto
     {
-        public int idRole { get; set; }
-        public string description { get; set; } = string.Empty;
-        public string status { get; set; } = string.Empty;
+        public int RoleId { get; set; }
+        public string Description { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
     }
 }

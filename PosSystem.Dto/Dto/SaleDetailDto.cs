@@ -10,13 +10,13 @@ namespace PosSystem.Dto.Dto
 {
     public class SaleDetailDto
     {
-        public int idSaleDetail { get; set; }
-        public int idSale { get; set; }
-        public int idProduct { get; set; }
-        public string productName { get; set; } = string.Empty;
-        public decimal price { get; set; }
-        public int count { get; set; }
-        public decimal discount { get; set; }
-        public decimal total { get; set; }
+        public int SaleDetailId { get; set; }
+        public int SaleId { get; set; }
+        public int ProductId { get; set; }
+        public string ProductName { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+        public int Count { get; set; }
+        public decimal Discount { get; set; }
+        public decimal Total { get; set; }
     }
 }

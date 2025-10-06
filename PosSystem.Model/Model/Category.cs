@@ -12,10 +12,10 @@ namespace PosSystem.Model.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int idCategory { get; set; }
-        public string description { get; set; } = string.Empty;
-        public string status { get; set; } = string.Empty;
-        public DateTime creationDate { get; private set; }
+        public int CategoryId { get; set; }
+        public string Description { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
+        public DateTime CreationDate { get; private set; }
         public virtual ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

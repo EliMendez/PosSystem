@@ -10,18 +10,18 @@ namespace PosSystem.Dto.Dto
 {
     public class SaleDto
     {
-        public int idSale { get; set; }
-        public string bill { get; set; } = string.Empty; //factura
-        public DateOnly saleDate { get; set; }
-        public string dni { get; set; } = string.Empty;
-        public string customer { get; set; } = string.Empty; //cliente
-        public decimal discount { get; set; }
-        public decimal total { get; set; }
-        public int idUser { get; set; }
-        public SaleStatus status { get; set; } = SaleStatus.Active;
-        public DateOnly? annulledDate { get; set; }
-        public string? reason { get; set; } //motivo
-        public int? userCancel { get; set; } //usuario que anula
+        public int SaleId { get; set; }
+        public string Bill { get; set; } = string.Empty; //factura
+        public DateOnly SaleDate { get; set; }
+        public string Dni { get; set; } = string.Empty;
+        public string Customer { get; set; } = string.Empty; //cliente
+        public decimal Discount { get; set; }
+        public decimal Total { get; set; }
+        public int UserId { get; set; }
+        public SaleStatus Status { get; set; } = SaleStatus.Active;
+        public DateOnly? AnnulledDate { get; set; }
+        public string? Reason { get; set; } //motivo
+        public int? UserCancel { get; set; } //usuario que anula
         public List<SaleDetailDto>? SaleDetails { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace PosSystem.Dto.Validators
     {
         public ValidateDocumentNumberDto() 
         {
-            RuleFor(dn => dn.document)
+            RuleFor(dn => dn.Document)
                 .NotEmpty().WithMessage("Es necesario especificar él número de documento.")
                 .MaximumLength(10).WithMessage("El número de documento no debe superar los 10 caracteres.");
         }

@@ -5,23 +5,24 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace PosSystem.Model.Model
 {
-    public class User
+    public class User: IdentityUser<int>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int idUser { get; set; }
-        public string name { get; set; } = string.Empty;
-        public string surname { get; set; } = string.Empty;
+        public int UserId { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Surname { get; set; } = string.Empty;
 
         [ForeignKey(nameof(Role))]
-        public int idRole { get; set; }
+        public int RoleId { get; set; }
         public virtual Role? Role { get; set; }
-        public string phone { get; set; } = string.Empty;
-        public string status { get; set; } = string.Empty;
-        public DateTime creationDate { get; private set; }
+        public string Phone { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
+        public DateTime CreationDate { get; private set; }
         public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
     }
 }

@@ -12,19 +12,19 @@ namespace PosSystem.Model.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int idSaleDetail { get; set; }
+        public int SaleDetailId { get; set; }
 
         [ForeignKey(nameof(Sale))]
-        public int idSale { get; set; }
+        public int SaleId { get; set; }
         public virtual Sale? Sale { get; set; }
 
         [ForeignKey(nameof(Product))]
-        public int idProduct { get; set; }
+        public int ProductId { get; set; }
         public virtual Product? Product { get; set; }
-        public string productName { get; set; } = string.Empty;
-        public decimal price { get; set; }
-        public int count { get; set; }
-        public decimal discount { get; set; }
-        public decimal total { get; set; }
+        public string ProductName { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+        public int Count { get; set; }
+        public decimal Discount { get; set; }
+        public decimal Total { get; set; }
     }
 }

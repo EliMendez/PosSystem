@@ -10,14 +10,14 @@ namespace PosSystem.Dto.Dto
 {
     public class ProductDto
     {
-        public int idProduct { get; set; }
-        public string barcode { get; set; } = string.Empty;
-        public string description { get; set; } = string.Empty;
-        public int idCategory { get; set; }
-        public string categoryDescription { get; set; } = string.Empty;
-        public decimal salePrice { get; set; }
-        public int stock { get; set; }
-        public int minimumStock { get; set; }
-        public string status { get; set; } = string.Empty;
+        public int ProductId { get; set; }
+        public string Barcode { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public int CategoryId { get; set; }
+        public string CategoryDescription { get; set; } = string.Empty;
+        public decimal SalePrice { get; set; }
+        public int Stock { get; set; }
+        public int MinimumStock { get; set; }
+        public string Status { get; set; } = string.Empty;
     }
 }

@@ -8,13 +8,13 @@ namespace PosSystem.Dto.Dto
 {
     public class BusinessDto
     {
-        public int idBusiness { get; set; }
-        public string ruc { get; set; } = string.Empty;
-        public string companyName { get; set; } = string.Empty; // razón social
-        public string email { get; set; } = string.Empty;
-        public string phone { get; set; } = string.Empty;
-        public string address { get; set; } = string.Empty; // dirección
-        public string owner { get; set; } = string.Empty; // propietario
-        public decimal discount { get; set; } // descuento
+        public int BusinessId { get; set; }
+        public string Ruc { get; set; } = string.Empty;
+        public string CompanyName { get; set; } = string.Empty; // razón social
+        public string Email { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty; // dirección
+        public string Owner { get; set; } = string.Empty; // propietario
+        public decimal Discount { get; set; } // descuento
     }
 }

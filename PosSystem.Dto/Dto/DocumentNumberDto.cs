@@ -8,7 +8,7 @@ namespace PosSystem.Dto.Dto
 {
     public class DocumentNumberDto
     {
-        public int idDocumentNumber { get; set; }
-        public string document { get; set; } = string.Empty;
+        public int DocumentNumberId { get; set; }
+        public string Document { get; set; } = string.Empty;
     }
 }

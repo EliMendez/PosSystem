@@ -12,8 +12,8 @@ namespace PosSystem.Model.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int idDocumentNumber { get; set; }
-        public string document { get; set; } = string.Empty;
-        public DateTime creationDate { get; private set; }
+        public int DocumentNumberId { get; set; }
+        public string Document { get; set; } = string.Empty;
+        public DateTime CreationDate { get; private set; }
     }
 }

@@ -12,17 +12,17 @@ namespace PosSystem.Model.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int idProduct { get; set; }
-        public string barcode { get; set; } = string.Empty;
-        public string description { get; set; } = string.Empty;
+        public int ProductId { get; set; }
+        public string Barcode { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
 
         [ForeignKey(nameof(Category))]
-        public int idCategory { get; set; }
+        public int CategoryId { get; set; }
         public virtual Category? Category { get; set; }
-        public decimal salePrice { get; set; }
-        public int stock { get; set; }
-        public int minimumStock { get; set; }
-        public string status { get; set; } = string.Empty;
-        public DateTime creationDate { get; private set; }
+        public decimal SalePrice { get; set; }
+        public int Stock { get; set; }
+        public int MinimumStock { get; set; }
+        public string Status { get; set; } = string.Empty;
+        public DateTime CreationDate { get; private set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PosSystem.Model.Context;
 
@@ -11,9 +12,11 @@ using PosSystem.Model.Context;
 namespace PosSystem.Model.Migrations
 {
     [DbContext(typeof(PosSystemContext))]
-    partial class PosSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20251006003311_Update-Model-User")]
+    partial class UpdateModelUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,63 +27,63 @@ namespace PosSystem.Model.Migrations
 
             modelBuilder.Entity("PosSystem.Model.Model.Business", b =>
                 {
-                    b.Property<int>("BusinessId")
+                    b.Property<int>("idBusiness")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BusinessId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idBusiness"));
 
-                    b.Property<string>("Address")
+                    b.Property<string>("address")
                         .IsRequired()
                         .HasMaxLength(500)
                         .IsUnicode(false)
                         .HasColumnType("varchar(500)");
 
-                    b.Property<string>("CompanyName")
+                    b.Property<string>("companyName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("creationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<decimal>("Discount")
+                    b.Property<decimal>("discount")
                         .ValueGeneratedOnAdd()
                         .HasPrecision(4, 2)
                         .IsUnicode(false)
                         .HasColumnType("decimal(4,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<string>("Email")
+                    b.Property<string>("email")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Owner")
+                    b.Property<string>("owner")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("phone")
                         .IsRequired()
                         .HasMaxLength(15)
                         .IsUnicode(false)
                         .HasColumnType("varchar(15)");
 
-                    b.Property<string>("Ruc")
+                    b.Property<string>("ruc")
                         .IsRequired()
                         .HasMaxLength(20)
                         .IsUnicode(false)
                         .HasColumnType("varchar(20)");
 
-                    b.HasKey("BusinessId");
+                    b.HasKey("idBusiness");
 
-                    b.HasIndex("Phone")
+                    b.HasIndex("phone")
                         .IsUnique();
 
                     b.ToTable("Businesses");
@@ -88,32 +91,32 @@ namespace PosSystem.Model.Migrations
 
             modelBuilder.Entity("PosSystem.Model.Model.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("idCategory")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idCategory"));
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("creationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("description")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("status")
                         .IsRequired()
                         .HasMaxLength(8)
                         .IsUnicode(false)
                         .HasColumnType("varchar(8)");
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("idCategory");
 
-                    b.HasIndex("Description")
+                    b.HasIndex("description")
                         .IsUnique();
 
                     b.ToTable("Categories");
@@ -121,26 +124,26 @@ namespace PosSystem.Model.Migrations
 
             modelBuilder.Entity("PosSystem.Model.Model.DocumentNumber", b =>
                 {
-                    b.Property<int>("DocumentNumberId")
+                    b.Property<int>("idDocumentNumber")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DocumentNumberId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idDocumentNumber"));
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("creationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<string>("Document")
+                    b.Property<string>("document")
                         .IsRequired()
                         .HasMaxLength(10)
                         .IsUnicode(false)
                         .HasColumnType("varchar(10)");
 
-                    b.HasKey("DocumentNumberId");
+                    b.HasKey("idDocumentNumber");
 
-                    b.HasIndex("Document")
+                    b.HasIndex("document")
                         .IsUnique();
 
                     b.ToTable("documentNumbers");
@@ -148,96 +151,96 @@ namespace PosSystem.Model.Migrations
 
             modelBuilder.Entity("PosSystem.Model.Model.Product", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("idProduct")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idProduct"));
 
-                    b.Property<string>("Barcode")
+                    b.Property<string>("barcode")
                         .IsRequired()
                         .HasMaxLength(30)
                         .IsUnicode(false)
                         .HasColumnType("varchar(30)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("creationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("description")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("MinimumStock")
+                    b.Property<int>("idCategory")
+                        .HasColumnType("int");
+
+                    b.Property<int>("minimumStock")
                         .ValueGeneratedOnAdd()
                         .IsUnicode(false)
                         .HasColumnType("int")
                         .HasDefaultValue(5);
 
-                    b.Property<decimal>("SalePrice")
+                    b.Property<decimal>("salePrice")
                         .HasPrecision(18, 2)
                         .IsUnicode(false)
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("status")
                         .IsRequired()
                         .HasMaxLength(8)
                         .IsUnicode(false)
                         .HasColumnType("varchar(8)");
 
-                    b.Property<int>("Stock")
+                    b.Property<int>("stock")
                         .ValueGeneratedOnAdd()
                         .IsUnicode(false)
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.HasKey("ProductId");
+                    b.HasKey("idProduct");
 
-                    b.HasIndex("Barcode")
+                    b.HasIndex("barcode")
                         .IsUnique();
 
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("Description")
+                    b.HasIndex("description")
                         .IsUnique();
+
+                    b.HasIndex("idCategory");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("PosSystem.Model.Model.Role", b =>
                 {
-                    b.Property<int>("RoleId")
+                    b.Property<int>("idRole")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idRole"));
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("creationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("description")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("status")
                         .IsRequired()
                         .HasMaxLength(8)
                         .IsUnicode(false)
                         .HasColumnType("varchar(8)");
 
-                    b.HasKey("RoleId");
+                    b.HasKey("idRole");
 
-                    b.HasIndex("Description")
+                    b.HasIndex("description")
                         .IsUnique();
 
                     b.ToTable("Roles");
@@ -245,146 +248,141 @@ namespace PosSystem.Model.Migrations
 
             modelBuilder.Entity("PosSystem.Model.Model.Sale", b =>
                 {
-                    b.Property<int>("SaleId")
+                    b.Property<int>("idSale")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SaleId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idSale"));
 
-                    b.Property<DateOnly?>("AnnulledDate")
+                    b.Property<DateOnly?>("annulledDate")
                         .IsRequired()
                         .HasColumnType("date");
 
-                    b.Property<string>("Bill")
+                    b.Property<string>("bill")
                         .IsRequired()
                         .HasMaxLength(30)
                         .IsUnicode(false)
                         .HasColumnType("varchar(30)");
 
-                    b.Property<string>("Customer")
+                    b.Property<string>("customer")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<decimal>("Discount")
+                    b.Property<decimal>("discount")
                         .ValueGeneratedOnAdd()
                         .HasPrecision(4, 2)
                         .IsUnicode(false)
                         .HasColumnType("decimal(4,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<string>("Dni")
+                    b.Property<string>("dni")
                         .IsRequired()
                         .HasMaxLength(20)
                         .IsUnicode(false)
                         .HasColumnType("varchar(20)");
 
-                    b.Property<string>("Reason")
+                    b.Property<int>("idUser")
+                        .HasColumnType("int");
+
+                    b.Property<string>("reason")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("SaleDate")
+                    b.Property<DateOnly>("saleDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("date")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Total")
+                    b.Property<decimal>("total")
                         .ValueGeneratedOnAdd()
                         .HasPrecision(18, 2)
                         .IsUnicode(false)
                         .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<int?>("UserCancel")
+                    b.Property<int?>("userCancel")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.HasKey("idSale");
 
-                    b.HasKey("SaleId");
-
-                    b.HasIndex("Bill")
+                    b.HasIndex("bill")
                         .IsUnique();
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("idUser");
 
                     b.ToTable("Sale");
                 });
 
             modelBuilder.Entity("PosSystem.Model.Model.SaleDetail", b =>
                 {
-                    b.Property<int>("SaleDetailId")
+                    b.Property<int>("idSaleDetail")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SaleDetailId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idSaleDetail"));
 
-                    b.Property<int>("Count")
+                    b.Property<int>("count")
                         .ValueGeneratedOnAdd()
                         .IsUnicode(false)
                         .HasColumnType("int")
                         .HasDefaultValue(1);
 
-                    b.Property<decimal>("Discount")
+                    b.Property<decimal>("discount")
                         .ValueGeneratedOnAdd()
                         .HasPrecision(18, 2)
                         .IsUnicode(false)
                         .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<decimal>("Price")
+                    b.Property<int>("idProduct")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idSale")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("price")
                         .HasPrecision(18, 2)
                         .IsUnicode(false)
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductName")
+                    b.Property<string>("productName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("SaleId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Total")
+                    b.Property<decimal>("total")
                         .HasPrecision(18, 2)
                         .IsUnicode(false)
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("SaleDetailId");
+                    b.HasKey("idSaleDetail");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("idProduct");
 
-                    b.HasIndex("SaleId");
+                    b.HasIndex("idSale");
 
                     b.ToTable("SaleDetail");
                 });
 
             modelBuilder.Entity("PosSystem.Model.Model.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("idUser")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idUser"));
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -401,12 +399,6 @@ namespace PosSystem.Model.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(35)");
-
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(max)");
 
@@ -416,35 +408,14 @@ namespace PosSystem.Model.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(15)");
-
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(8)");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(35)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -452,12 +423,44 @@ namespace PosSystem.Model.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.Property<DateTime>("creationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
-                    b.HasIndex("Phone")
+                    b.Property<int>("idRole")
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasMaxLength(35)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(35)");
+
+                    b.Property<string>("phone")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(8)");
+
+                    b.Property<string>("surname")
+                        .IsRequired()
+                        .HasMaxLength(35)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(35)");
+
+                    b.HasKey("idUser");
+
+                    b.HasIndex("idRole");
+
+                    b.HasIndex("phone")
                         .IsUnique();
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -466,7 +469,7 @@ namespace PosSystem.Model.Migrations
                 {
                     b.HasOne("PosSystem.Model.Model.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("idCategory")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -477,7 +480,7 @@ namespace PosSystem.Model.Migrations
                 {
                     b.HasOne("PosSystem.Model.Model.User", "User")
                         .WithMany("Sales")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("idUser")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -488,13 +491,13 @@ namespace PosSystem.Model.Migrations
                 {
                     b.HasOne("PosSystem.Model.Model.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("idProduct")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PosSystem.Model.Model.Sale", "Sale")
                         .WithMany("SaleDetails")
-                        .HasForeignKey("SaleId")
+                        .HasForeignKey("idSale")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -507,7 +510,7 @@ namespace PosSystem.Model.Migrations
                 {
                     b.HasOne("PosSystem.Model.Model.Role", "Role")
                         .WithMany("Users")
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("idRole")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
