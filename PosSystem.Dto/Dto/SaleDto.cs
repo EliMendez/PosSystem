@@ -11,7 +11,7 @@ namespace PosSystem.Dto.Dto
     public class SaleDto
     {
         public int SaleId { get; set; }
-        public string Bill { get; set; } = string.Empty; //factura
+        public string? Bill { get; set; } //factura
         public DateOnly SaleDate { get; set; }
         public string Dni { get; set; } = string.Empty;
         public string Customer { get; set; } = string.Empty; //cliente
