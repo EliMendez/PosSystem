@@ -18,8 +18,8 @@ namespace PosSystem.Model.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Sale> Sales { get; set; }
-        public DbSet<Sale> SaleDetails { get; set; }
-        public DbSet<DocumentNumber> documentNumbers { get; set; }
+        public DbSet<SaleDetail> SaleDetails { get; set; }
+        public DbSet<DocumentNumber> DocumentNumbers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
