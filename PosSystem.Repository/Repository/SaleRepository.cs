@@ -34,7 +34,7 @@ namespace PosSystem.Repository.Repository
 
             // Update Sale
             sale.Status = SaleStatus.Annulled;
-            sale.AnnulledDate = DateOnly.FromDateTime(DateTime.Today);
+            sale.AnnulledDate = DateTime.Today;
             sale.Reason = reason;
             sale.UserCancel = userId;
 
@@ -130,7 +130,7 @@ namespace PosSystem.Repository.Repository
             return saleDetails;
         }
 
-        public async Task<List<Sale>> SearchByDate(DateOnly startDate, DateOnly endDate)
+        public async Task<List<Sale>> SearchByDate(DateTime startDate, DateTime endDate)
         {
             return await _posSystemContext.Sales
                 .Where(s => s.SaleDate >= startDate && s.SaleDate <= endDate)

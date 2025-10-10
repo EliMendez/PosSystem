@@ -31,9 +31,9 @@ namespace PosSystem.Repository.Repository
             return business;
         }
 
-        public async Task<Business?> GetById(int id)
+        public async Task<Business?> Get()
         {
-            return await _posSystemContext.Businesses.FindAsync(id);
+            return await _posSystemContext.Businesses.FirstOrDefaultAsync();
         }
 
         public async Task<Business> Update(Business business)

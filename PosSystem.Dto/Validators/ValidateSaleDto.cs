@@ -36,7 +36,7 @@ namespace PosSystem.Dto.Validators
             RuleFor(s => s.AnnulledDate)
                 .Null().When(s => s.Status == Model.Model.SaleStatus.Active).WithMessage("La fecha de anulación debe ser nula si el estado de la venta es: 'Activa'.")
                 .NotNull().When(s => s.Status == Model.Model.SaleStatus.Annulled).WithMessage("La fecha de anulación es requerida si el estado de la venta es: 'Anulada'.")
-                .LessThanOrEqualTo(DateOnly.FromDateTime(DateTime.Now)).When(s => s.AnnulledDate.HasValue).WithMessage("La fecha de anulación no puede ser mayor a la fecha actual.");
+                .LessThanOrEqualTo(DateTime.Now).When(s => s.AnnulledDate.HasValue).WithMessage("La fecha de anulación no puede ser mayor a la fecha actual.");
 
             RuleFor(s => s.Reason)
                 .NotEmpty().When(s => s.Status == Model.Model.SaleStatus.Annulled).WithMessage("El motivo de anulación de la venta es requerido cuando la venta es: 'Anulada'.");

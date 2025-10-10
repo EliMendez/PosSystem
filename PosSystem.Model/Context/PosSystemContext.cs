@@ -214,6 +214,7 @@ namespace PosSystem.Model.Context
 
                 entity.Property(s => s.SaleDate)
                 .IsRequired()
+                .HasColumnType("date")
                 .HasDefaultValueSql("GETDATE()");
 
                 entity.Property(s => s.Dni)
@@ -243,7 +244,8 @@ namespace PosSystem.Model.Context
                 .HasConversion<string>();
 
                 entity.Property(s => s.AnnulledDate)
-                .IsRequired();
+                .HasColumnType("date")
+                .IsRequired(false);
 
                 entity.Property(s => s.Reason)
                 .IsRequired(false)

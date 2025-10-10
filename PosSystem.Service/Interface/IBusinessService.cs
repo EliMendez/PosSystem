@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PosSystem.Repository.Interface
+namespace PosSystem.Service.Interface
 {
-    public interface IBusinessRepository
+    public interface IBusinessService
     {
         Task<Business?> Get();
-        Task<Business> Create(Business business);
-        Task<Business> Update(Business business);
+        Task<Business> Save(Business business);
+
     }
 }

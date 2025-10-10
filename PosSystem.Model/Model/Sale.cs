@@ -14,7 +14,7 @@ namespace PosSystem.Model.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SaleId { get; set; }
         public string Bill { get; set; } = string.Empty; //factura
-        public DateOnly SaleDate { get; set; }
+        public DateTime SaleDate { get; set; }
         public string Dni { get; set; } = string.Empty;
         public string Customer { get; set; } = string.Empty; //cliente
         public decimal Discount { get; set; }
@@ -24,7 +24,7 @@ namespace PosSystem.Model.Model
         public int UserId { get; set; }
         public virtual User? User { get; set; }
         public SaleStatus Status { get; set; } = SaleStatus.Active;
-        public DateOnly? AnnulledDate { get; set; }
+        public DateTime? AnnulledDate { get; set; }
         public string? Reason { get; set; } //motivo
         public int? UserCancel {  get; set; } //usuario que anula
         public virtual ICollection<SaleDetail>? SaleDetails { get; set; }

@@ -1,15 +1,16 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PosSystem.Model.Context;
-using PosSystem.Repository.Repository;
-using AutoMapper;
-using PosSystem.Repository.Interface;
-using Microsoft.AspNetCore.Identity;
 using PosSystem.Model.Model;
+using PosSystem.Repository.Interface;
+using PosSystem.Repository.Repository;
+using PosSystem.Service.Interface;
+using PosSystem.Service.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Get and validate the connection to the database
-var connectionString = builder.Configuration.GetConnectionString("Connection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 if (string.IsNullOrEmpty(connectionString))
 {
     throw new InvalidOperationException("La cadena de conexión 'Connection' no está configurada");
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<PosSystemContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
+
 
 // Add services to the container.
 
@@ -43,6 +45,15 @@ builder.Services.AddScoped<IBusinessRepository, BusinessRepository>();
 builder.Services.AddScoped<IDocumentNumberRepository, DocumentNumberRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+
+// Register services with their interfaces
+builder.Services.AddScoped<RoleService>();
+builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<IBusinessService, BusinessService>();
+builder.Services.AddScoped<IDocumentNumberService, DocumentNumberService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ISaleService, SaleService>();
 
 var app = builder.Build();
 

@@ -317,6 +317,10 @@ namespace PosSystem.Service.Mapping
             // Mapping Sale to SaleDto
             CreateMap<Sale, SaleDto>()
                 .ForMember(
+                    destination => destination.SaleDate,
+                    opt => opt.MapFrom(origin => origin.SaleDate)
+                 )
+                .ForMember(
                     destination => destination.Dni,
                     opt => opt.MapFrom(origin => origin.Dni)
                 )
@@ -356,6 +360,11 @@ namespace PosSystem.Service.Mapping
                     opt => opt.Ignore()
                 )
                 .ForMember(
+                    destination => destination.SaleDate,
+                    //opt => opt.MapFrom(origin => DateOnly.FromDateTime(origin.SaleDate))
+                    opt => opt.MapFrom(origin => origin.SaleDate)
+                )
+                .ForMember(
                     destination => destination.SaleId,
                     opt => opt.MapFrom(origin => origin.SaleId)
                 )
@@ -386,6 +395,10 @@ namespace PosSystem.Service.Mapping
                 .ForMember(
                     destination => destination.Reason,
                     opt => opt.MapFrom(origin => origin.Reason)
+                )
+                .ForMember(
+                    destination => destination.AnnulledDate,
+                    opt => opt.MapFrom(origin => origin.AnnulledDate!.Value)
                 )
                 .ForMember(
                     destination => destination.UserCancel,
@@ -462,5 +475,4 @@ namespace PosSystem.Service.Mapping
             #endregion
         }
     }
-
 }

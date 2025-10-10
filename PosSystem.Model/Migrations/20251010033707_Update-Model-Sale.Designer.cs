@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PosSystem.Model.Context;
 
@@ -11,9 +12,11 @@ using PosSystem.Model.Context;
 namespace PosSystem.Model.Migrations
 {
     [DbContext(typeof(PosSystemContext))]
-    partial class PosSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20251010033707_Update-Model-Sale")]
+    partial class UpdateModelSale
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,7 +86,7 @@ namespace PosSystem.Model.Migrations
                     b.HasIndex("Phone")
                         .IsUnique();
 
-                    b.ToTable("Businesses", (string)null);
+                    b.ToTable("Businesses");
                 });
 
             modelBuilder.Entity("PosSystem.Model.Model.Category", b =>
@@ -116,7 +119,7 @@ namespace PosSystem.Model.Migrations
                     b.HasIndex("Description")
                         .IsUnique();
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("PosSystem.Model.Model.DocumentNumber", b =>
@@ -143,7 +146,7 @@ namespace PosSystem.Model.Migrations
                     b.HasIndex("Document")
                         .IsUnique();
 
-                    b.ToTable("DocumentNumbers", (string)null);
+                    b.ToTable("DocumentNumbers");
                 });
 
             modelBuilder.Entity("PosSystem.Model.Model.Product", b =>
@@ -207,7 +210,7 @@ namespace PosSystem.Model.Migrations
                     b.HasIndex("Description")
                         .IsUnique();
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("PosSystem.Model.Model.Role", b =>
@@ -240,7 +243,7 @@ namespace PosSystem.Model.Migrations
                     b.HasIndex("Description")
                         .IsUnique();
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("PosSystem.Model.Model.Sale", b =>
@@ -311,7 +314,7 @@ namespace PosSystem.Model.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Sales", (string)null);
+                    b.ToTable("Sales");
                 });
 
             modelBuilder.Entity("PosSystem.Model.Model.SaleDetail", b =>
@@ -363,7 +366,7 @@ namespace PosSystem.Model.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("SaleDetails", (string)null);
+                    b.ToTable("SaleDetails");
                 });
 
             modelBuilder.Entity("PosSystem.Model.Model.User", b =>
@@ -458,7 +461,7 @@ namespace PosSystem.Model.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("PosSystem.Model.Model.Product", b =>
