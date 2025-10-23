@@ -81,6 +81,7 @@ builder.Services.AddScoped<IBusinessRepository, BusinessRepository>();
 builder.Services.AddScoped<IDocumentNumberRepository, DocumentNumberRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 
 // Register services with their interfaces
 builder.Services.AddScoped<RoleService>();
@@ -90,6 +91,7 @@ builder.Services.AddScoped<IBusinessService, BusinessService>();
 builder.Services.AddScoped<IDocumentNumberService, DocumentNumberService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ISaleService, SaleService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 // Configuring CORS to allow requests from Angular
 builder.Services.AddCors(options =>

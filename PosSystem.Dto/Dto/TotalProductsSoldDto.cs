@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PosSystem.Model
+namespace PosSystem.Dto.Dto
 {
-    internal class ViewBestSellingProducts
+    public class TotalProductsSoldDto
     {
+        public int TotalProducts { get; set; }
     }
 }

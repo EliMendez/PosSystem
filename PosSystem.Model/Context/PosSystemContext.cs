@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PosSystem.Model.Model;
+using PosSystem.Model.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,13 @@ namespace PosSystem.Model.Context
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SaleDetails { get; set; }
         public DbSet<DocumentNumber> DocumentNumbers { get; set; }
+
+        // Queries
+        public DbSet<ViewSellingMoreProducts> SellingMoreProducts { get; set; }
+        public DbSet<ViewLowStockProducts> LowStockProducts { get; set; }
+        public DbSet<ViewLastWeekSales> LastWeekSales { get; set; }
+        public DbSet<ViewTotalProductsSold> TotalProductsSolds { get; set; }
+        public DbSet<ViewLastWeekIncomeTotal> LastWeekIncomeTotal { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -119,7 +127,7 @@ namespace PosSystem.Model.Context
                 entity.Property(b => b.Discount)
                 .IsRequired()
                 .HasDefaultValue(0)
-                .HasPrecision(4,2)
+                .HasPrecision(4, 2)
                 .IsUnicode(false);
 
                 entity.Property(u => u.CreationDate)
@@ -177,7 +185,7 @@ namespace PosSystem.Model.Context
 
                 entity.Property(p => p.SalePrice)
                 .IsRequired()
-                .HasPrecision(18,2)
+                .HasPrecision(18, 2)
                 .IsUnicode(false);
 
                 entity.Property(p => p.Stock)
@@ -230,7 +238,7 @@ namespace PosSystem.Model.Context
                 entity.Property(s => s.Discount)
                 .IsRequired()
                 .HasDefaultValue(0)
-                .HasPrecision(8,2)
+                .HasPrecision(8, 2)
                 .IsUnicode(false);
 
                 entity.Property(s => s.Total)
@@ -321,6 +329,12 @@ namespace PosSystem.Model.Context
 
                 entity.HasIndex(dn => dn.Document).IsUnique();
             });
+
+            modelBuilder.Entity<ViewSellingMoreProducts>().HasNoKey().ToView("vwSellingMoreProducts");
+            modelBuilder.Entity<ViewLowStockProducts>().HasNoKey().ToView("vwLowStockProducts");
+            modelBuilder.Entity<ViewLastWeekSales>().HasNoKey().ToView("vwLastWeekSales");
+            modelBuilder.Entity<ViewTotalProductsSold>().HasNoKey().ToView("vwTotalProductsSold");
+            modelBuilder.Entity<ViewLastWeekIncomeTotal>().HasNoKey().ToView("vwLastWeekIncomeTotal");
         }
     }
 }

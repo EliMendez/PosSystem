@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PosSystem.Dto.Dto;
 using PosSystem.Model.Model;
+using PosSystem.Model.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -472,6 +473,14 @@ namespace PosSystem.Service.Mapping
                     destination => destination.Total,
                     opt => opt.MapFrom(origin => origin.Total)
                 );
+            #endregion
+
+            #region Dashboard
+            CreateMap<ViewSellingMoreProducts, SellingMoreProductsDto>();
+            CreateMap<ViewLowStockProducts, LowStockProductsDto>();
+            CreateMap<ViewLastWeekSales, LastWeekSalesDto>();
+            CreateMap<ViewTotalProductsSold, TotalProductsSoldDto>();
+            CreateMap<ViewLastWeekIncomeTotal, LastWeekIncomeTotalDto>();
             #endregion
         }
     }
