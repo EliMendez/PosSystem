@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PosSystem.Model.Context;
 
@@ -11,9 +12,11 @@ using PosSystem.Model.Context;
 namespace PosSystem.Model.Migrations
 {
     [DbContext(typeof(PosSystemContext))]
-    partial class PosSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20251020023045_Update-Model-Sale-vr2")]
+    partial class UpdateModelSalevr2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,9 +271,9 @@ namespace PosSystem.Model.Migrations
 
                     b.Property<decimal>("Discount")
                         .ValueGeneratedOnAdd()
-                        .HasPrecision(8, 2)
+                        .HasPrecision(4, 2)
                         .IsUnicode(false)
-                        .HasColumnType("decimal(8,2)")
+                        .HasColumnType("decimal(4,2)")
                         .HasDefaultValue(0m);
 
                     b.Property<string>("Dni")

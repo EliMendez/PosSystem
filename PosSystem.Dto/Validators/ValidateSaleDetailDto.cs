@@ -26,7 +26,7 @@ namespace PosSystem.Dto.Validators
                 .NotEmpty().WithMessage("Es necesario especificar el precio del producto.")
                 .GreaterThan(0).WithMessage("El precio debe ser mayor a cero.");
 
-            RuleFor(s => s.Count)
+            RuleFor(s => s.Quantity)
                 .NotEmpty().WithMessage("Es necesario especificar la cantidad de venta.")
                 .GreaterThan(0).WithMessage("La cantidad de la venta no puede ser mayor a cero.");
 

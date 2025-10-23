@@ -426,8 +426,8 @@ namespace PosSystem.Service.Mapping
                     opt => opt.MapFrom(origin => origin.Price)
                 )
                 .ForMember(
-                    destination => destination.Count,
-                    opt => opt.MapFrom(origin => origin.Count)
+                    destination => destination.Quantity,
+                    opt => opt.MapFrom(origin => origin.Quantity)
                 )
                 .ForMember(
                     destination => destination.Discount,
@@ -461,8 +461,8 @@ namespace PosSystem.Service.Mapping
                     opt => opt.MapFrom(origin => origin.Price)
                 )
                 .ForMember(
-                    destination => destination.Count,
-                    opt => opt.MapFrom(origin => origin.Count)
+                    destination => destination.Quantity,
+                    opt => opt.MapFrom(origin => origin.Quantity)
                 )
                 .ForMember(
                     destination => destination.Discount,

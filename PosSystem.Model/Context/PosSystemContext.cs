@@ -230,7 +230,7 @@ namespace PosSystem.Model.Context
                 entity.Property(s => s.Discount)
                 .IsRequired()
                 .HasDefaultValue(0)
-                .HasPrecision(4,2)
+                .HasPrecision(8,2)
                 .IsUnicode(false);
 
                 entity.Property(s => s.Total)
@@ -289,7 +289,7 @@ namespace PosSystem.Model.Context
                 .HasPrecision(18, 2)
                 .IsUnicode(false);
 
-                entity.Property(sd => sd.Count)
+                entity.Property(sd => sd.Quantity)
                 .IsRequired()
                 .HasDefaultValue(1)
                 .IsUnicode(false);

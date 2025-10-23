@@ -6,12 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using PosSystem.Dto.Dto;
 using PosSystem.Model.Model;
 using PosSystem.Service.Interface;
-using PosSystem.Service.Service;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PosSystem.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/sales")]
     [ApiController]
     public class SaleController : ControllerBase
     {
@@ -76,7 +74,7 @@ namespace PosSystem.Api.Controllers
             }
         }
 
-        [HttpPut("{id}/annular")]
+        [HttpPut("{saleId}/annular")]
         public async Task<IActionResult> CancelSale(int saleId, [FromBody] CancelSaleDto cancelSaleDto)
         {
             if (cancelSaleDto.Reason == null || cancelSaleDto.UserId <= 0)

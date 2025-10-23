@@ -7,7 +7,6 @@ using PosSystem.Dto.Dto;
 using PosSystem.Dto.Validators;
 using PosSystem.Model.Model;
 using PosSystem.Service.Interface;
-using PosSystem.Service.Service;
 
 namespace PosSystem.Api.Controllers
 {

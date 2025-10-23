@@ -48,7 +48,7 @@ namespace PosSystem.Repository.Repository
 
                     if (product != null)
                     {
-                        product.Stock += detail.Count;
+                        product.Stock += detail.Quantity;
                     }
                 }
             }
@@ -156,13 +156,13 @@ namespace PosSystem.Repository.Repository
                         $"no existe en el inventario.");
                 }
 
-                if(product.Stock < detail.Count)
+                if(product.Stock < detail.Quantity)
                 {
                     throw new InvalidOperationException($"No hay suficiente stock para el producto: {product.Description} " +
-                        $"Stock disponible: {product.Stock}, cantidad solicitada: {detail.Count}.");
+                        $"Stock disponible: {product.Stock}, cantidad solicitada: {detail.Quantity}.");
                 }
 
-                product.Stock -= detail.Count;
+                product.Stock -= detail.Quantity;
             }
 
             await _posSystemContext.SaveChangesAsync();
