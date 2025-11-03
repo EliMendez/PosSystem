@@ -19,19 +19,28 @@ namespace PosSystem.Repository.Repository
             _context = context;
         }
 
-        public async Task<List<ViewLastWeekIncomeTotal>> GetLastWeekIncomeTotal()
+        public async Task<List<ViewTotalIncomeLastWeek>> GetTotalIncomeLastWeek()
         {
-            var sales = await _context.LastWeekIncomeTotal
-                .FromSqlRaw("SELECT * FROM vwLastWeekIncomeTotal")
+            var sales = await _context.TotalIncomeLastWeek
+                .FromSqlRaw("SELECT * FROM vwTotalIncomeLastWeek")
                 .ToListAsync();
 
             return sales;
         }
 
-        public Task<List<ViewLastWeekSales>> GetLastWeekSales()
+        public Task<List<ViewTotalSalesLastWeek>> GetTotalSalesLastWeek()
         {
             var sales = _context.LastWeekSales
-                .FromSqlRaw("SELECT * FROM vwLastWeekSales")
+                .FromSqlRaw("SELECT * FROM vwTotalSalesLastWeek")
+                .ToListAsync();
+
+            return sales;
+        }
+
+        public async Task<List<ViewTotalProductsSold>> GetTotalProductsSold()
+        {
+            var sales = await _context.TotalProductsSolds
+                .FromSqlRaw("SELECT * FROM vwTotalProductsSold")
                 .ToListAsync();
 
             return sales;
@@ -50,15 +59,6 @@ namespace PosSystem.Repository.Repository
         {
             var sales = _context.SellingMoreProducts
                 .FromSqlRaw("SELECT * FROM vwSellingMoreProducts")
-                .ToListAsync();
-
-            return sales;
-        }
-
-        public async Task<List<ViewTotalProductsSold>> GetTotalProductsSold()
-        {
-            var sales = await _context.TotalProductsSolds
-                .FromSqlRaw("SELECT * FROM vwTotalProductsSold")
                 .ToListAsync();
 
             return sales;

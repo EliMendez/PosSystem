@@ -18,14 +18,14 @@ namespace PosSystem.Service.Service
             _dashboardRepository = dashboardRepository;
         }
 
-        public async Task<List<ViewLastWeekIncomeTotal>> GetLastWeekIncomeTotal()
+        public async Task<List<ViewTotalIncomeLastWeek>> GetTotalIncomeLastWeek()
         {
-            return await _dashboardRepository.GetLastWeekIncomeTotal();
+            return await _dashboardRepository.GetTotalIncomeLastWeek();
         }
 
-        public async Task<List<ViewLastWeekSales>> GetLastWeekSales()
+        public async Task<List<ViewTotalSalesLastWeek>> GetTotalSalesLastWeek()
         {
-            return await _dashboardRepository.GetLastWeekSales();
+            return await _dashboardRepository.GetTotalSalesLastWeek();
         }
 
         public async Task<List<ViewLowStockProducts>> GetLowStockProducts()

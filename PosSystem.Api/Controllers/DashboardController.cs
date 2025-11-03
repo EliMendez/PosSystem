@@ -50,13 +50,13 @@ namespace PosSystem.Api.Controllers
             }
         }
 
-        [HttpGet("last_week_sales")]
-        public async Task<ActionResult<List<ViewLastWeekSales>>> GetLastWeekSales()
+        [HttpGet("total_sales_last_week")]
+        public async Task<ActionResult<List<ViewTotalSalesLastWeek>>> GetTotalSalesLastWeek()
         {
             try
             {
-                var sales = await _dashboardService.GetLastWeekSales();
-                var salesDto = _mapper.Map<List<LastWeekSalesDto>>(sales);
+                var sales = await _dashboardService.GetTotalSalesLastWeek();
+                var salesDto = _mapper.Map<List<TotalSalesLastWeekDto>>(sales);
                 return Ok(salesDto);
             }
             catch (Exception ex)
@@ -65,13 +65,13 @@ namespace PosSystem.Api.Controllers
             }
         }
 
-        [HttpGet("last_week_income_total")]
-        public async Task<ActionResult<List<ViewLastWeekIncomeTotal>>> GetLastWeekIncomeTotal()
+        [HttpGet("total_income_last_week")]
+        public async Task<ActionResult<List<ViewTotalIncomeLastWeek>>> GetTotalIncomeLastWeek()
         {
             try
             {
-                var sales = await _dashboardService.GetLastWeekIncomeTotal();
-                var salesDto = _mapper.Map<List<LastWeekIncomeTotalDto>>(sales);
+                var sales = await _dashboardService.GetTotalIncomeLastWeek();
+                var salesDto = _mapper.Map<List<TotalIncomeLastWeekDto>>(sales);
                 return Ok(salesDto);
             }
             catch (Exception ex)

@@ -11,8 +11,8 @@ namespace PosSystem.Repository.Interface
     {
         Task<List<ViewSellingMoreProducts>> GetSellingMoreProducts();
         Task<List<ViewLowStockProducts>> GetLowStockProducts();
-        Task<List<ViewLastWeekSales>> GetLastWeekSales();
+        Task<List<ViewTotalSalesLastWeek>> GetTotalSalesLastWeek();
         Task<List<ViewTotalProductsSold>> GetTotalProductsSold();
-        Task<List<ViewLastWeekIncomeTotal>> GetLastWeekIncomeTotal();
+        Task<List<ViewTotalIncomeLastWeek>> GetTotalIncomeLastWeek();
     }
 }

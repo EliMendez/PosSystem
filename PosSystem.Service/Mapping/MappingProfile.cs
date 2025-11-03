@@ -478,9 +478,9 @@ namespace PosSystem.Service.Mapping
             #region Dashboard
             CreateMap<ViewSellingMoreProducts, SellingMoreProductsDto>();
             CreateMap<ViewLowStockProducts, LowStockProductsDto>();
-            CreateMap<ViewLastWeekSales, LastWeekSalesDto>();
+            CreateMap<ViewTotalSalesLastWeek, TotalSalesLastWeekDto>();
             CreateMap<ViewTotalProductsSold, TotalProductsSoldDto>();
-            CreateMap<ViewLastWeekIncomeTotal, LastWeekIncomeTotalDto>();
+            CreateMap<ViewTotalIncomeLastWeek, TotalIncomeLastWeekDto>();
             #endregion
         }
     }

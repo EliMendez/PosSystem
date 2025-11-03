@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PosSystem.Dto.Dto
 {
-    public class LastWeekIncomeTotalDto
+    public class TotalSalesLastWeekDto
     {
         public DateTime SaleDate { get; set; }
-        public decimal TotalIncomes { get; set; }
+        public int TotalSales { get;set; }
     }
 }

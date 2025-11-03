@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PosSystem.Model.View
+namespace PosSystem.Dto.Dto
 {
-    public class ViewLastWeekIncomeTotal
+    public class TotalIncomeLastWeekDto
     {
         public DateTime SaleDate { get; set; }
         public decimal TotalIncomes { get; set; }

@@ -25,9 +25,9 @@ namespace PosSystem.Model.Context
         // Queries
         public DbSet<ViewSellingMoreProducts> SellingMoreProducts { get; set; }
         public DbSet<ViewLowStockProducts> LowStockProducts { get; set; }
-        public DbSet<ViewLastWeekSales> LastWeekSales { get; set; }
+        public DbSet<ViewTotalSalesLastWeek> LastWeekSales { get; set; }
         public DbSet<ViewTotalProductsSold> TotalProductsSolds { get; set; }
-        public DbSet<ViewLastWeekIncomeTotal> LastWeekIncomeTotal { get; set; }
+        public DbSet<ViewTotalIncomeLastWeek> TotalIncomeLastWeek { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -332,9 +332,9 @@ namespace PosSystem.Model.Context
 
             modelBuilder.Entity<ViewSellingMoreProducts>().HasNoKey().ToView("vwSellingMoreProducts");
             modelBuilder.Entity<ViewLowStockProducts>().HasNoKey().ToView("vwLowStockProducts");
-            modelBuilder.Entity<ViewLastWeekSales>().HasNoKey().ToView("vwLastWeekSales");
+            modelBuilder.Entity<ViewTotalSalesLastWeek>().HasNoKey().ToView("vwTotalSalesLastWeek");
             modelBuilder.Entity<ViewTotalProductsSold>().HasNoKey().ToView("vwTotalProductsSold");
-            modelBuilder.Entity<ViewLastWeekIncomeTotal>().HasNoKey().ToView("vwLastWeekIncomeTotal");
+            modelBuilder.Entity<ViewTotalIncomeLastWeek>().HasNoKey().ToView("vwTotalIncomeLastWeek");
         }
     }
 }

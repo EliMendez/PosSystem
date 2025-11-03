@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PosSystem.Model.View
 {
-    public class ViewLastWeekSales
+    public class ViewTotalSalesLastWeek
     {
         public DateTime SaleDate { get; set; }
         public int TotalSales { get;set; }
