@@ -1,11 +1,6 @@
 ﻿using PosSystem.Model.View;
 using PosSystem.Repository.Interface;
 using PosSystem.Service.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Service.Service
 {

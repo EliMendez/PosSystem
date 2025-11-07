@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using PosSystem.Dto.Dto;
+using PosSystem.Dto.Validators;
 using PosSystem.Model.Model;
-using PosSystem.Service.Service;
+using PosSystem.Service.Interface;
 
 namespace PosSystem.Api.Controllers
 {
@@ -13,10 +13,10 @@ namespace PosSystem.Api.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        private readonly RoleService _roleService;
+        private readonly IService<Role> _roleService;
         private readonly IMapper _mapper;
 
-        public RoleController(RoleService roleService, IMapper mapper)
+        public RoleController(IService<Role> roleService, IMapper mapper)
         {
             _roleService = roleService;
             _mapper = mapper;
@@ -45,24 +45,32 @@ namespace PosSystem.Api.Controllers
                 var role = await _roleService.GetById(id);
                 if(role == null)
                 {
-                    return NotFound(new { statusCode = 404, message = "Registro no encontrado." });
+                    return NotFound(new { StatusCode =404, Message ="Registro no encontrado." });
                 }
                 return Ok(_mapper.Map<RoleDto>(role));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al obtener el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al obtener el registro.", Error = ex.Message });
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] RoleDto roleDto)
         {
+            var validator = new RoleDtoValidator();
+            var validationResult = await validator.ValidateAsync(roleDto);
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+                return BadRequest(new { StatusCode = 400, Message = "Los datos proporcionados no son válidos.", errors });
+            }
+
             try
             {
                 var role = _mapper.Map<Role>(roleDto);
                 var createdRole = await _roleService.Create(role);
-                return Ok(new {StatusCode = 200, message = "Registro creado con éxito.", data = _mapper.Map<RoleDto>(createdRole)});
+                return Ok(new {StatusCode = 200, Message ="Registro creado con éxito.", Data = _mapper.Map<RoleDto>(createdRole)});
             }
             catch(DbUpdateException ex)
             {
@@ -75,27 +83,38 @@ namespace PosSystem.Api.Controllers
                     });
                 }
 
-                return StatusCode(500, new { statusCode = 500, message = "Error al crear el registro.", error = ex.InnerException?.Message ?? ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al crear el registro.", Error = ex.InnerException?.Message ?? ex.Message });
             }
             catch(Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al crear el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al crear el registro.", Error = ex.Message });
             }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] RoleDto roleDto)
         {
+            if (id <= 0)
+                return BadRequest(new { StatusCode = 400, Message = "ID no puede ser menor o igual a cero." });
+
+            var validator = new RoleDtoValidator();
+            var validationResult = await validator.ValidateAsync(roleDto);
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+                return BadRequest(new { StatusCode = 400, Message = "Los datos proporcionados no son válidos.", errors });
+            }
+            
             try
             {
                 if(id != roleDto.RoleId)
                 {
-                    return BadRequest(new { statusCode = 400, message = "El ID del registro no coincide."});
+                    return BadRequest(new { StatusCode = 400, Message = "El ID del registro no coincide."});
                 }
 
                 var role = _mapper.Map<Role>(roleDto);
                 var updatedRole = await _roleService.Update(role);
-                return Ok(new { StatusCode = 200, message = "Registro actualizado con éxito.", data = _mapper.Map<RoleDto>(updatedRole) });
+                return Ok(new { StatusCode = 200, Message = "Registro actualizado con éxito.", Data = _mapper.Map<RoleDto>(updatedRole) });
             }
             catch (DbUpdateException ex)
             {
@@ -108,11 +127,11 @@ namespace PosSystem.Api.Controllers
                     });
                 }
 
-                return StatusCode(500, new { statusCode = 500, message = "Error al actualizar el registro.", error = ex.InnerException?.Message ?? ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al actualizar el registro.", Error = ex.InnerException?.Message ?? ex.Message });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al actualizar el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al actualizar el registro.", Error = ex.Message });
             }
         }
 
@@ -124,13 +143,13 @@ namespace PosSystem.Api.Controllers
                 var result = await _roleService.Delete(id);
                 if(!result)
                 {
-                    return NotFound(new { StatusCode = 404, message = "Registro no encontrado."});
+                    return NotFound(new { StatusCode = 404, Message ="Registro no encontrado."});
                 }
-                return Ok(new { StatusCode = 200, message = "Registro eliminado satisfactoriamente."});
+                return Ok(new { StatusCode = 200, Message = "Registro eliminado satisfactoriamente."});
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al eliminar el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al eliminar el registro.", Error = ex.Message });
             }
         }
     }

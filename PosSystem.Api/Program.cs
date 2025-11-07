@@ -74,9 +74,9 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Register repositories with their interfaces
-builder.Services.AddScoped<RoleRepository>();
-builder.Services.AddScoped<CategoryRepository>();
-builder.Services.AddScoped<ProductRepository>();
+builder.Services.AddScoped<IRepository<Role>, RoleRepository >();
+builder.Services.AddScoped<IRepository<Category>, CategoryRepository >();
+builder.Services.AddScoped<IRepository<Product>, ProductRepository>();
 builder.Services.AddScoped<IBusinessRepository, BusinessRepository>();
 builder.Services.AddScoped<IDocumentNumberRepository, DocumentNumberRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -84,9 +84,9 @@ builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 
 // Register services with their interfaces
-builder.Services.AddScoped<RoleService>();
-builder.Services.AddScoped<CategoryService>();
-builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<IService<Role>, RoleService>();
+builder.Services.AddScoped<IService<Category>, CategoryService>();
+builder.Services.AddScoped<IService<Product>, ProductService>();
 builder.Services.AddScoped<IBusinessService, BusinessService>();
 builder.Services.AddScoped<IDocumentNumberService, DocumentNumberService>();
 builder.Services.AddScoped<IUserService, UserService>();

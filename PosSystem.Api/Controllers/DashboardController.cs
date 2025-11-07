@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PosSystem.Dto.Dto;
 using PosSystem.Model.View;
@@ -31,7 +30,7 @@ namespace PosSystem.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Error al obtener los productos más vendidos.", error = ex.Message });
+                return StatusCode(500, new { message = "Error al obtener los productos más vendidos.", Error = ex.Message });
             }
         }
 
@@ -46,7 +45,7 @@ namespace PosSystem.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Error al obtener los productos por agotar.", error = ex.Message });
+                return StatusCode(500, new { message = "Error al obtener los productos por agotar.", Error = ex.Message });
             }
         }
 
@@ -61,7 +60,7 @@ namespace PosSystem.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Error al obtener las ventas de la última semana.", error = ex.Message });
+                return StatusCode(500, new { message = "Error al obtener las ventas de la última semana.", Error = ex.Message });
             }
         }
 
@@ -76,7 +75,7 @@ namespace PosSystem.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Error al obtener los ingresos de la última semana.", error = ex.Message });
+                return StatusCode(500, new { message = "Error al obtener los ingresos de la última semana.", Error = ex.Message });
             }
         }
 
@@ -91,7 +90,7 @@ namespace PosSystem.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Error al obtener los productos vendidos.", error = ex.Message });
+                return StatusCode(500, new { message = "Error al obtener los productos vendidos.", Error = ex.Message });
             }
         }
     }

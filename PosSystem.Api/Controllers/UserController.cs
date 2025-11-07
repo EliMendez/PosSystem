@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -46,33 +45,32 @@ namespace PosSystem.Api.Controllers
                 var user = await _userService.GetById(id);
                 if (user == null)
                 {
-                    return NotFound(new { statusCode = 404, message = "Registro no encontrado." });
+                    return NotFound(new { StatusCode =404, Message ="Registro no encontrado." });
                 }
                 return Ok(_mapper.Map<UserDto>(user));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al obtener el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al obtener el registro.", Error = ex.Message });
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UserDto userDto)
         {
-            var validator = new ValidateUserDto();
+            var validator = new UserDtoValidator();
             var validationResult = await validator.ValidateAsync(userDto);
-
             if (!validationResult.IsValid)
             {
                 var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
-                return BadRequest(new { statusCode = 400, message = "Los datos proporcionados son inválidos.", errors });
+                return BadRequest(new { StatusCode = 400, Message = "Los datos proporcionados no son válidos.", errors });
             }
 
             try
             {
                 var user = _mapper.Map<User>(userDto);
                 var createdUser = await _userService.Create(user, userDto.Password);
-                return Ok(new { StatusCode = 200, message = "Registro creado con éxito.", data = _mapper.Map<UserDto>(createdUser) });
+                return Ok(new { StatusCode = 200, Message = "Registro creado con éxito.", Data = _mapper.Map<UserDto>(createdUser) });
             }
             catch (DbUpdateException ex)
             {
@@ -99,37 +97,40 @@ namespace PosSystem.Api.Controllers
                         }
                     }
 
-                    return BadRequest(new { statusCode = 400, message = $"Ya existe un registro con {duplicateField} ingresado. Inténtelo de nuevo." });
+                    return BadRequest(new { StatusCode = 400, Message = $"Ya existe un registro con {duplicateField} ingresado. Inténtelo de nuevo." });
                 }
 
-                return StatusCode(500, new { statusCode = 500, message = $"Error al crear el registro, error = {ex.InnerException?.Message ?? ex.Message}" });
+                return StatusCode(500, new { StatusCode = 500, Message = $"Error al crear el registro, Error ={ex.InnerException?.Message ?? ex.Message}" });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al crear el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al crear el registro.", Error = ex.Message });
             }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UserDto userDto)
         {
-            if (!ModelState.IsValid)
+            if (id <= 0)
+                return BadRequest(new { StatusCode = 400, Message = "ID no puede ser menor o igual a cero." });
+
+            var validator = new UserDtoValidator();
+            var validationResult = await validator.ValidateAsync(userDto);
+            if (!validationResult.IsValid)
             {
-                var errors = ModelState.Values.SelectMany(p => p.Errors)
-                    .Select(e => e.ErrorMessage)
-                    .ToList();
-                return BadRequest(new { statusCode = 400, message = "Los datos proporcionados son inválidos.", errors = errors ?? new List<string>() });
+                var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+                return BadRequest(new { StatusCode = 400, Message = "Los datos proporcionados no son válidos.", errors });
             }
 
             try
             {
                 var user = _mapper.Map<User>(userDto);
                 var updatedUser = await _userService.Update(user, userDto.Password);
-                return Ok(new { StatusCode = 200, message = "Registro actualizado con éxito.", data = _mapper.Map<UserDto>(updatedUser) });
+                return Ok(new { StatusCode = 200, Message = "Registro actualizado con éxito.", Data = _mapper.Map<UserDto>(updatedUser) });
             }
             catch (KeyNotFoundException ex)
             {
-                return NotFound(new { statusCode = 404, error = ex.Message });
+                return NotFound(new { StatusCode =404, Error = ex.Message });
             }
             catch (DbUpdateException ex)
             {
@@ -158,14 +159,14 @@ namespace PosSystem.Api.Controllers
                         }
                     }
 
-                    return BadRequest(new { statusCode = 400, message = $"Ya existe un registro con {duplicateField} ingresado. Inténtelo de nuevo." });
+                    return BadRequest(new { StatusCode = 400, Message = $"Ya existe un registro con {duplicateField} ingresado. Inténtelo de nuevo." });
                 }
 
-                return StatusCode(500, new { statusCode = 500, message = $"Error al actualizar el registro, error = {ex.InnerException?.Message ?? ex.Message}" });
+                return StatusCode(500, new { StatusCode = 500, Message = $"Error al actualizar el registro, Error ={ex.InnerException?.Message ?? ex.Message}" });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al actualizar el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al actualizar el registro.", Error = ex.Message });
             }
         }
 
@@ -177,13 +178,13 @@ namespace PosSystem.Api.Controllers
                 var result = await _userService.Delete(id);
                 if (!result)
                 {
-                    return NotFound(new { StatusCode = 404, message = "Registro no encontrado." });
+                    return NotFound(new { StatusCode = 404, Message ="Registro no encontrado." });
                 }
-                return Ok(new { StatusCode = 200, message = "Registro eliminado satisfactoriamente." });
+                return Ok(new { StatusCode = 200, Message = "Registro eliminado satisfactoriamente." });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al eliminar el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al eliminar el registro.", Error = ex.Message });
             }
         }
 
@@ -195,13 +196,13 @@ namespace PosSystem.Api.Controllers
                 var user = await _userService.GetRoleById(id);
                 if (string.IsNullOrEmpty(user))
                 {
-                    return NotFound(new { StatusCode = 404, message = "Registro no encontrado." });
+                    return NotFound(new { StatusCode = 404, Message ="Registro no encontrado." });
                 }
                 return Ok(user);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al obtener el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al obtener el registro.", Error = ex.Message });
             }
         }
     }

@@ -1,16 +1,11 @@
 ﻿using FluentValidation;
 using PosSystem.Dto.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Dto.Validators
 {
-    public class ValidateUserDto: AbstractValidator<UserDto>
+    public class UserDtoValidator: AbstractValidator<UserDto>
     {
-        public ValidateUserDto() 
+        public UserDtoValidator() 
         {
             RuleFor(u => u.Name)
                 .NotEmpty().WithMessage("Es necesario especificar el nombre del usuario.")

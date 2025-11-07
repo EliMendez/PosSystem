@@ -1,16 +1,11 @@
 ﻿using FluentValidation;
 using PosSystem.Dto.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Dto.Validators
 {
-    public class ValidateSaleDetailDto: AbstractValidator<SaleDetailDto>
+    public class SaleDetailDtoValidator: AbstractValidator<SaleDetailDto>
     {
-        public ValidateSaleDetailDto() 
+        public SaleDetailDtoValidator() 
         {
             RuleFor(s => s.SaleId)
                 .GreaterThan(0).WithMessage("No se ha especificado el ID de la venta.");

@@ -1,18 +1,13 @@
 ﻿using PosSystem.Model.Model;
-using PosSystem.Repository.Repository;
+using PosSystem.Repository.Interface;
 using PosSystem.Service.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Service.Service
 {
     public class ProductService : IService<Product>
     {
-        private readonly ProductRepository _productRepository;
-        public ProductService(ProductRepository productRepository)
+        private readonly IRepository<Product> _productRepository;
+        public ProductService(IRepository<Product> productRepository)
         {
             _productRepository = productRepository;
         }
@@ -24,6 +19,9 @@ namespace PosSystem.Service.Service
 
         public async Task<bool> Delete(int id)
         {
+            if (id <= 0)
+                throw new ArgumentException("ID no puede ser menor o igual a cero.");
+
             return await _productRepository.Delete(id);
         }
 
@@ -34,6 +32,9 @@ namespace PosSystem.Service.Service
 
         public async Task<Product?> GetById(int id)
         {
+            if (id <= 0)
+                throw new ArgumentException("ID no puede ser menor o igual a cero.");
+
             return await _productRepository.GetById(id);
         }
 

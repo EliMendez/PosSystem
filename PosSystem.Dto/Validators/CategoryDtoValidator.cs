@@ -1,16 +1,11 @@
 ﻿using FluentValidation;
 using PosSystem.Dto.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Dto.Validators
 {
-    public class ValidateCategoryDto: AbstractValidator<CategoryDto>
+    public class CategoryDtoValidator: AbstractValidator<CategoryDto>
     {
-        public ValidateCategoryDto() 
+        public CategoryDtoValidator() 
         {
             RuleFor(c => c.Description)
                 .NotEmpty().WithMessage("Es necesario especificar la descripción de la categoría.")

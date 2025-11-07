@@ -1,18 +1,16 @@
-﻿using PosSystem.Model.Model;
-using PosSystem.Repository.Repository;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http.HttpResults;
+using PosSystem.Dto.Validators;
+using PosSystem.Model.Model;
+using PosSystem.Repository.Interface;
 using PosSystem.Service.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Service.Service
 {
     public class CategoryService : IService<Category>
     {
-        private readonly CategoryRepository _categoryRepository;
-        public CategoryService(CategoryRepository categoryRepository)
+        private readonly IRepository<Category> _categoryRepository;
+        public CategoryService(IRepository<Category> categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }
@@ -24,6 +22,9 @@ namespace PosSystem.Service.Service
 
         public async Task<bool> Delete(int id)
         {
+            if (id <= 0)
+                throw new ArgumentException("ID no puede ser menor o igual a cero.");
+
             return await _categoryRepository.Delete(id);
         }
 
@@ -34,6 +35,9 @@ namespace PosSystem.Service.Service
 
         public async Task<Category?> GetById(int id)
         {
+            if (id <= 0)
+                throw new ArgumentException("ID no puede ser menor o igual a cero.");
+
             return await _categoryRepository.GetById(id);
         }
 

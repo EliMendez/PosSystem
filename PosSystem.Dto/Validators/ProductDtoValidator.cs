@@ -1,17 +1,11 @@
 ﻿using FluentValidation;
 using PosSystem.Dto.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PosSystem.Dto.Validators
 {
-    public class ValidateProductDto : AbstractValidator<ProductDto>
+    public class ProductDtoValidator : AbstractValidator<ProductDto>
     {
-        public ValidateProductDto() 
+        public ProductDtoValidator() 
         {
             RuleFor(p => p.Barcode)
                 .NotEmpty().WithMessage("Es necesario especificar el código de barra.")

@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosSystem.Api", "PosSystem.Api\PosSystem.Api.csproj", "{8D581532-4CF4-4396-A76B-9EFEBFBECDA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosSystem.Api", "PosSystem.Api\PosSystem.Api.csproj", "{8D581532-4CF4-4396-A76B-9EFEBFBECDA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosSystem.Dto", "PosSystem.Dto\PosSystem.Dto.csproj", "{B17B58FB-E4C0-4AF5-87B7-5F2C3352253D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosSystem.Dto", "PosSystem.Dto\PosSystem.Dto.csproj", "{B17B58FB-E4C0-4AF5-87B7-5F2C3352253D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosSystem.Model", "PosSystem.Model\PosSystem.Model.csproj", "{E0A775EC-E673-4269-AE09-7826FE3DA0C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosSystem.Model", "PosSystem.Model\PosSystem.Model.csproj", "{E0A775EC-E673-4269-AE09-7826FE3DA0C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosSystem.Repository", "PosSystem.Repository\PosSystem.Repository.csproj", "{973455F4-5FF1-42B8-B8B8-48F7B94F79B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosSystem.Repository", "PosSystem.Repository\PosSystem.Repository.csproj", "{973455F4-5FF1-42B8-B8B8-48F7B94F79B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosSystem.Service", "PosSystem.Service\PosSystem.Service.csproj", "{B9D7C9A6-5CD8-4738-BF24-7647557F7C2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosSystem.Service", "PosSystem.Service\PosSystem.Service.csproj", "{B9D7C9A6-5CD8-4738-BF24-7647557F7C2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosSystem.Tests", "PosSystemTests\PosSystem.Tests.csproj", "{2C4C777E-63C5-422A-853F-12B5BE4B637E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B9D7C9A6-5CD8-4738-BF24-7647557F7C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9D7C9A6-5CD8-4738-BF24-7647557F7C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9D7C9A6-5CD8-4738-BF24-7647557F7C2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C4C777E-63C5-422A-853F-12B5BE4B637E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C4C777E-63C5-422A-853F-12B5BE4B637E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C4C777E-63C5-422A-853F-12B5BE4B637E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C4C777E-63C5-422A-853F-12B5BE4B637E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

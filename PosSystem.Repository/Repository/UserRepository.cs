@@ -3,11 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using PosSystem.Model.Context;
 using PosSystem.Model.Model;
 using PosSystem.Repository.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Repository.Repository
 {

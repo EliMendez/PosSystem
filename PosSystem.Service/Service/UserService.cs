@@ -4,13 +4,9 @@ using Microsoft.IdentityModel.Tokens;
 using PosSystem.Model.Model;
 using PosSystem.Repository.Interface;
 using PosSystem.Service.Interface;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Service.Service
 {
@@ -44,11 +40,17 @@ namespace PosSystem.Service.Service
 
         public async Task<User?> GetById(int id)
         {
+            if (id <= 0)
+                throw new ArgumentException("ID no puede ser menor o igual a cero.");
+
             return await _userRepository.GetById(id);
         }
 
         public async Task<string> GetRoleById(int id)
         {
+            if (id <= 0)
+                throw new ArgumentException("ID no puede ser menor o igual a cero.");
+
             return await _userRepository.GetRoleById(id);
         }
 

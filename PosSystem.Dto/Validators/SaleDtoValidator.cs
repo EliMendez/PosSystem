@@ -1,16 +1,11 @@
 ﻿using FluentValidation;
 using PosSystem.Dto.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Dto.Validators
 {
-    public class ValidateSaleDto: AbstractValidator<SaleDto>
+    public class SaleDtoValidator: AbstractValidator<SaleDto>
     {
-        public ValidateSaleDto() 
+        public SaleDtoValidator() 
         {
             RuleFor(s => s.Dni)
                 .NotEmpty().WithMessage("Es necesario especificar el número de identifición del cliente.")

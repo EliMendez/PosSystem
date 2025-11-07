@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PosSystem.Dto.Dto;
 using PosSystem.Model.Model;
@@ -35,7 +34,7 @@ namespace PosSystem.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al obtener el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al obtener el registro.", Error = ex.Message });
             }
         }
     }

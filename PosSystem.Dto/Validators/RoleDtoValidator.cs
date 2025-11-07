@@ -1,16 +1,11 @@
 ﻿using FluentValidation;
 using PosSystem.Dto.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Dto.Validators
 {
-    public class ValidateRoleDto: AbstractValidator<RoleDto>
+    public class RoleDtoValidator: AbstractValidator<RoleDto>
     {
-        public ValidateRoleDto() 
+        public RoleDtoValidator() 
         {
             RuleFor(r => r.Description)
                 .NotEmpty().WithMessage("Es necesario especificar la descripción del rol.")

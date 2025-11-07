@@ -1,16 +1,11 @@
 ﻿using FluentValidation;
 using PosSystem.Dto.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Dto.Validators
 {
-    public class ValidateBusinessDto : AbstractValidator<BusinessDto>
+    public class BusinessDtoValidator : AbstractValidator<BusinessDto>
     {
-        public ValidateBusinessDto() 
+        public BusinessDtoValidator() 
         {
             RuleFor(b => b.Ruc)
                 .NotEmpty().WithMessage("Es necesario especificar el número ruc de la empresa.")

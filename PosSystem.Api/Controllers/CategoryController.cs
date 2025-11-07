@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using PosSystem.Dto.Dto;
+using PosSystem.Dto.Validators;
 using PosSystem.Model.Model;
-using PosSystem.Service.Service;
+using PosSystem.Service.Interface;
 
 namespace PosSystem.Api.Controllers
 {
@@ -13,10 +13,10 @@ namespace PosSystem.Api.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly CategoryService _categoryService;
+        private readonly IService<Category> _categoryService;
         private readonly IMapper _mapper;
 
-        public CategoryController(CategoryService categoryService, IMapper mapper)
+        public CategoryController(IService<Category> categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
             _mapper = mapper;
@@ -51,18 +51,26 @@ namespace PosSystem.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al obtener el registro.", error = ex.Message });
+                return StatusCode(500, new { statusCode = 500, message = "Error al obtener el registro.", Error = ex.Message });
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CategoryDto categoryDto)
         {
+            var validator = new CategoryDtoValidator();
+            var validationResult = await validator.ValidateAsync(categoryDto);
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+                return BadRequest(new { StatusCode = 400, Message = "Los datos proporcionados no son válidos.", errors });
+            }
+
             try
             {
                 var category = _mapper.Map<Category>(categoryDto);
                 var createdCategory = await _categoryService.Create(category);
-                return Ok(new { StatusCode = 200, message = "Registro creado con éxito.", data = _mapper.Map<CategoryDto>(createdCategory) });
+                return Ok(new { StatusCode = 200, Message = "Registro creado con éxito.", Data = _mapper.Map<CategoryDto>(createdCategory) });
             }
             catch (DbUpdateException ex)
             {
@@ -75,27 +83,38 @@ namespace PosSystem.Api.Controllers
                     });
                 }
 
-                return StatusCode(500, new { statusCode = 500, message = "Error al crear el registro.", error = ex.InnerException?.Message ?? ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al crear el registro.", Error = ex.InnerException?.Message ?? ex.Message });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al crear el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al crear el registro.", Error = ex.Message });
             }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] CategoryDto categoryDto)
         {
+            if (id <= 0)
+                return BadRequest(new { StatusCode = 400, Message = "ID no puede ser menor o igual a cero." });
+
+            var validator = new CategoryDtoValidator();
+            var validationResult = await validator.ValidateAsync(categoryDto);
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+                return BadRequest(new { StatusCode = 400, Message = "Los datos proporcionados no son válidos.", errors });
+            }
+
             try
             {
                 if (id != categoryDto.CategoryId)
                 {
-                    return BadRequest(new { statusCode = 400, message = "El ID del registro no coincide." });
+                    return BadRequest(new { StatusCode = 400, Message = "El ID del registro no coincide." });
                 }
 
                 var category = _mapper.Map<Category>(categoryDto);
                 var updatedCategory = await _categoryService.Update(category);
-                return Ok(new { StatusCode = 200, message = "Registro actualizado con éxito.", data = _mapper.Map<CategoryDto>(updatedCategory) });
+                return Ok(new { StatusCode = 200, Message = "Registro actualizado con éxito.", Data = _mapper.Map<CategoryDto>(updatedCategory) });
             }
             catch (DbUpdateException ex)
             {
@@ -108,11 +127,11 @@ namespace PosSystem.Api.Controllers
                     });
                 }
 
-                return StatusCode(500, new { statusCode = 500, message = "Error al actualizar el registro.", error = ex.InnerException?.Message ?? ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al actualizar el registro.", Error = ex.InnerException?.Message ?? ex.Message });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al actualizar el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al actualizar el registro.", Error = ex.Message });
             }
         }
 
@@ -124,13 +143,13 @@ namespace PosSystem.Api.Controllers
                 var result = await _categoryService.Delete(id);
                 if (!result)
                 {
-                    return NotFound(new { StatusCode = 404, message = "Registro no encontrado." });
+                    return NotFound(new { StatusCode = 404, Message = "Registro no encontrado." });
                 }
-                return Ok(new { StatusCode = 200, message = "Registro eliminado satisfactoriamente." });
+                return Ok(new { StatusCode = 200, Message = "Registro eliminado satisfactoriamente." });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { statusCode = 500, message = "Error al eliminar el registro.", error = ex.Message });
+                return StatusCode(500, new { StatusCode = 500, Message = "Error al eliminar el registro.", Error = ex.Message });
             }
         }
     }

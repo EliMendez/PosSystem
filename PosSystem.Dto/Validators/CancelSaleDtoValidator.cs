@@ -1,16 +1,11 @@
 ﻿using FluentValidation;
 using PosSystem.Dto.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Dto.Validators
 {
-    public class ValidateCancelSaleDto : AbstractValidator<CancelSaleDto>
+    public class CancelSaleDtoValidator : AbstractValidator<CancelSaleDto>
     {
-        public ValidateCancelSaleDto()
+        public CancelSaleDtoValidator()
         {
             RuleFor(s => s.Reason)
                 .NotEmpty().WithMessage("El motivo de anulación de la venta es requerida.");

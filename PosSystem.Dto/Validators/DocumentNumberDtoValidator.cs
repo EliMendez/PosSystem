@@ -1,16 +1,11 @@
 ﻿using FluentValidation;
 using PosSystem.Dto.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosSystem.Dto.Validators
 {
-    public class ValidateDocumentNumberDto : AbstractValidator<DocumentNumberDto>
+    public class DocumentNumberDtoValidator : AbstractValidator<DocumentNumberDto>
     {
-        public ValidateDocumentNumberDto() 
+        public DocumentNumberDtoValidator() 
         {
             RuleFor(dn => dn.Document)
                 .NotEmpty().WithMessage("Es necesario especificar él número de documento.")
