@@ -15,6 +15,12 @@ namespace PosSystem.Service.Service
 
         public async Task<Sale?> CancelSale(int saleId, string reason, int userId)
         {
+            if (saleId <= 0 || userId <= 0)
+                throw new ArgumentException("ID no puede ser menor o igual a cero.");
+
+            if (reason != null || reason != "")
+                throw new ArgumentException("La razón para anular la venta es requerida.");
+
             return await _saleRepository.CancelSale(saleId, reason, userId);
         }
 
@@ -30,6 +36,9 @@ namespace PosSystem.Service.Service
 
         public async Task<List<SaleDetail>> GetDetailsBySaleId(int saleId)
         {
+            if (saleId <= 0)
+                throw new ArgumentException("ID no puede ser menor o igual a cero.");
+
             return await _saleRepository.GetDetailsBySaleId(saleId);
         }
 

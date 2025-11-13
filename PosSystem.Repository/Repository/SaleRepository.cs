@@ -127,6 +127,9 @@ namespace PosSystem.Repository.Repository
 
         public async Task<List<Sale>> SearchByDate(DateTime startDate, DateTime endDate)
         {
+            if (startDate > endDate)
+                throw new ArgumentException("La fecha inicial debe ser menor que la fecha final del rango a evaluar.");
+
             return await _posSystemContext.Sales
                 .Where(s => s.SaleDate >= startDate && s.SaleDate <= endDate)
                 .ToListAsync();
